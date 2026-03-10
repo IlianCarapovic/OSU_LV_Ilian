@@ -28,12 +28,15 @@ def plot_height_weight_50(height,weight):
     plt.show()
 
 data = read_data()
-print("Min height:", np.min(data[1]))
-print("Max height:", np.max(data[1]))
-print("Average height:", np.mean(data[1]))
+
+print(data[1])
+number_of_participants, size = data.shape
+print("Number of participants " ,number_of_participants)
+print("Min height:", np.min(data[:,1]))
+print("Max height:", np.max(data[:,1]))
+print("Average height:", np.mean(data[:,1]))
 
 ind_m = (data[:,0] == 1)
-print(ind_m)
 heights_m = data[ind_m,1]
 print("Min height:", np.min(heights_m))
 print("Max height:", np.max(heights_m))
