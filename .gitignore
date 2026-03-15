@@ -1,0 +1,12 @@
+# macOS system files
+.DS_Store
+
+# PyCharm project files
+.idea/
+
+# Python virtual environments
+.venv/
+
+# Bytecode
+__pycache__/
+*.pyc
