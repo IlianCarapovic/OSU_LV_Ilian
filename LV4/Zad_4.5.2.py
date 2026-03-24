@@ -17,6 +17,8 @@ input_variables = ['Fuel Type',
                    ]
 output = 'CO2 Emissions (g/km)'
 
+print(data)
+
 X = data[input_variables]
 Y = data[output]
 
@@ -46,7 +48,7 @@ linear_regression.fit(x_train_final, y_train)
 y_pred = linear_regression.predict(x_test_final)
 plt.scatter(y_test, y_pred)
 plt.plot([y_test.min(), y_test.max()], [y_test.min(), y_test.max()], color = 'red')
-
+plt.show()
 #Evaluation of model
 MSE = mean_squared_error(y_test, y_pred)
 RMSE = np.sqrt(mean_squared_error(y_test, y_pred))
@@ -59,8 +61,11 @@ print("MAE: ", MAE)
 print("MAPE: ", MAPE)
 print("R2: ", R2)
 
+#index of evry row is the same from original data red from csv
 errors = np.abs(y_test - y_pred)
 max_error_id = np.argmax(errors)
+print(max_error_id)
+print(x_test_final[max_error_id])
 original_index = x_test.index[max_error_id]
 print(data.loc[original_index])
 

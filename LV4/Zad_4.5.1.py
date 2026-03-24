@@ -1,5 +1,4 @@
-import sklearn
-from sklearn import datasets
+
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_squared_error, mean_absolute_error, mean_absolute_percentage_error, r2_score
 from sklearn.model_selection import train_test_split
@@ -22,7 +21,7 @@ y = data["CO2 Emissions (g/km)"]
 
 X_train, X_test, y_train, y_test = train_test_split(X,
                                                     y, test_size=0.2,
-                                                    random_state=42)
+                                                    random_state=1)
 
 #b)
 plt.scatter(X_train["Engine Size (L)"], y_train, color="blue")
@@ -60,7 +59,7 @@ for col, coef in zip(X_train.columns, linearModel.coef_):
 #e)
 y_test_prediction = linearModel.predict(X_test_scaled)
 plt.scatter(y_test, y_test_prediction)
-plt.plot([y_test.min(), y_test.max()], [y_test.min(), y_test.max()], color="red")
+plt.plot([0,600], [0,600], color="red")
 plt.title("Predicted CO2 Emissions (g/km)")
 plt.xlabel("Real CO2 Emissions (g/km)")
 plt.ylabel("Predicted CO2 Emissions (g/km)")
