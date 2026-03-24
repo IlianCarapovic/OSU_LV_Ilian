@@ -1,5 +1,3 @@
-from unicodedata import category
-
 import pandas as pd
 import matplotlib.pyplot as plt
 
@@ -8,13 +6,11 @@ data = pd.read_csv("data_C02_emission.csv")
 print("TASK A")
 print("---------------------------")
 print(f"Number of measurements {len(data)}")
-for col in data.columns:
-    print(f"{col} : {data[col].dtype}")
-
+print(data.info())
 print(f"Left out values{data.isnull().sum()}")
 data_cleared = data.dropna()
 print(f"Double values {data.duplicated().sum()}")
-data_cleared = data.dropna()
+data_cleared = data.drop_duplicates()
 
 categorical_cols = ["Make", "Model", "Vehicle Class", "Transmission", "Fuel Type"]
 
@@ -38,6 +34,7 @@ print("TASK C")
 print("---------------------------")
 motor_size_specified = data_cleared[(data_cleared["Engine Size (L)"] > 2.5) & (data_cleared["Engine Size (L)"] < 3.5)]
 print(motor_size_specified[["Make", "Model", "Engine Size (L)"]].head(10))
+print(f"Cars with specified motor size = { motor_size_specified.shape[0] }")
 print(motor_size_specified["CO2 Emissions (g/km)"].mean())
 
 #d)
@@ -53,7 +50,6 @@ print("TASK E")
 print("---------------------------")
 cylinder_count = data_cleared["Cylinders"].value_counts().sort_index()
 print(cylinder_count)
-
 cylinder_emissions = data.groupby('Cylinders')['CO2 Emissions (g/km)'].mean()
 print(cylinder_emissions)
 
@@ -78,7 +74,7 @@ print("---------------------------")
 manual_cars = data_cleared[data_cleared["Transmission"].str.startswith("M")]
 print(f"Manual transmission cars = {manual_cars.shape[0]}")
 
-#i
+#i)
 print("TASK I")
 print("---------------------------")
 numerical_data = data_cleared.select_dtypes(include=['float64', 'int64'])
