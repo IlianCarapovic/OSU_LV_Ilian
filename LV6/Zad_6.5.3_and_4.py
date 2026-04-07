@@ -13,6 +13,7 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.pipeline import Pipeline
 from sklearn.pipeline import make_pipeline
 from sklearn.model_selection import GridSearchCV
+from sklearn.svm import SVC
 
 
 def plot_decision_regions(X, y, classifier, resolution=0.02):
@@ -103,12 +104,13 @@ def do_svm(c,gama,kernel):
     plt.show()
 
 #kernels: rbf,linear,sigmoid
-# do_svm(1,0.01,"rbf")
-# do_svm(1,0.1, "rbf")
-# do_svm(2,1.0, "rbf")
-# do_svm(0.1,1, "rbf")
-# do_svm(1.0,1, "rbf")
-# do_svm(10,1, "rbf")
+#gamma - curvature of the decision region
+do_svm(1,0.01,"rbf")
+do_svm(1,0.1, "rbf")
+do_svm(2,1.0, "rbf")
+do_svm(0.1,1, "rbf")
+do_svm(1.0,1, "rbf")
+do_svm(10,1, "rbf")
 
 # do_svm(1,0.01,"sigmoid")
 # do_svm(1,0.1, "sigmoid")
@@ -117,31 +119,39 @@ def do_svm(c,gama,kernel):
 # do_svm(1.0,1, "sigmoid")
 # do_svm(10,1, "sigmoid")
 
-do_svm(1,0.01,"linear")
-do_svm(1,0.1, "linear")
-do_svm(2,1.0, "linear")
-do_svm(0.1,1, "linear")
-do_svm(1.0,1, "linear")
-do_svm(10,1, "linear")
+# do_svm(1,0.01,"linear")
+# do_svm(1,0.1, "linear")
+# do_svm(2,1.0, "linear")
+# do_svm(0.1,1, "linear")
+# do_svm(1.0,1, "linear")
+# do_svm(10,1, "linear")
 
 #Zad_6.5.4
-svm_model = svm.SVC(kernel="rbf")
 param_grid = {
-    'C': [0.1, 1, 10, 100, 1000],
-    'gamma': [0.01, 0.1, 1, 10, 100]
+    'svc__C': [0.1, 1, 10, 100, 1000],
+    'svc__gamma': [0.01, 0.1, 1, 10, 100]
 }
 
-grid_svm = GridSearchCV(svm_model, param_grid=param_grid, scoring='accuracy', n_jobs=-1)
+pipe = Pipeline([
+    ('scaler', StandardScaler()),
+    ('svc', SVC(kernel='rbf', C=1.0))
+])
+
+grid_svm = GridSearchCV(pipe, param_grid=param_grid, scoring='accuracy', n_jobs=-1)
 grid_svm.fit(X_train_n, y_train)
 
-print("Best C:", grid_svm.best_params_['C'])
-print("Best gamma:", grid_svm.best_params_['gamma'])
+print("Best C:", grid_svm.best_params_['svc__C'])
+print("Best gamma:", grid_svm.best_params_['svc__gamma'])
 print("Best CV accuracy:", grid_svm.best_score_)
 
 do_svm(
-    grid_svm.best_params_["C"],
-    grid_svm.best_params_["gamma"],
+    grid_svm.best_params_["svc__C"],
+    grid_svm.best_params_["svc__gamma"],
     "rbf"
 )
+
+#overfitting - dobar training, a los test
+# underfitting - los na treningu
+
 
 

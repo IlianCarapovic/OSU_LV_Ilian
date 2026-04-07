@@ -104,12 +104,19 @@ do_knn(1)
 do_knn(100)
 
 #Zad_6.5.2
-knn = KNeighborsClassifier()
-param_grid = {'n_neighbors': range(1, 101)}
+pipe = Pipeline(
+    [   ("scaler", StandardScaler()),
+        ('knn', KNeighborsClassifier())
+     ])
 
-grid = GridSearchCV(knn, param_grid=param_grid, cv=5, scoring='accuracy')
+param_grid = {'knn__n_neighbors': range(1, 101)}
+
+
+grid = GridSearchCV(pipe, param_grid=param_grid, cv=5, scoring='accuracy', n_jobs=-1)
 grid.fit(X_train_n, y_train)
 
-print(f"Best K value: {grid.best_params_['n_neighbors']}")
+print(f"Best K value: {grid.best_params_['knn__n_neighbors']}")
 print(f"Best accuracy {grid.best_score_}")
-do_knn(grid.best_params_['n_neighbors'])
+do_knn(
+    grid.best_params_['knn__n_neighbors']
+ )
