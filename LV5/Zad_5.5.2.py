@@ -58,7 +58,10 @@ output_variable = ['species']
 
 # ulazne velicine: bill length, flipper_length
 input_variables = ['bill_length_mm',
-                   'flipper_length_mm']
+                   'flipper_length_mm',
+                   "body_mass_g",
+                   "bill_depth_mm"
+                   ]
 
 X = df[input_variables].to_numpy()
 y = df[output_variable].to_numpy().ravel()
@@ -91,7 +94,7 @@ print(theta0)
 print(coefs)
 
 #d)
-plot_decision_regions(X_train, y_train, logistic_regression, 0.02)
+#plot_decision_regions(X_train, y_train, logistic_regression, 0.02)
 
 #e)
 y_predict = logistic_regression.predict(X_test)
