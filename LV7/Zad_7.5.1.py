@@ -42,22 +42,20 @@ def generate_data(n_samples, flagc):
 
 # generiranje podatkovnih primjera
 # prikazi primjere u obliku dijagrama rasprsenja
-# plt.figure()
-# plt.scatter(X[:,0],X[:,1])
-# plt.xlabel('$x_1$')
-# plt.ylabel('$x_2$')
-# plt.title('podatkovni primjeri')
-# plt.show()
+
 
 
 # init – initialisation of  centara
 # ’k-means++’, ’random’, default=’k-means++’
-km = KMeans(n_clusters=3, init = "random", n_init = 6,
-            random_state = 0)
+
 
 #a)
-def do_tasks(n_samples, flagc):
+def do_tasks(n_samples, flagc, k=3):
     X = generate_data(n_samples, flagc)
+
+    km = KMeans(n_clusters= k, init="random", n_init=6,
+                random_state=0)
+
     km.fit(X)
 
     plt.figure()
@@ -67,8 +65,17 @@ def do_tasks(n_samples, flagc):
     plt.title('podatkovni primjeri')
     plt.show()
 
-do_tasks(500,1)
-do_tasks(500,2)
-do_tasks(500,3)
-do_tasks(500,4)
-do_tasks(500,5)
+X = generate_data(500,1)
+
+plt.figure()
+plt.scatter(X[:,0],X[:,1])
+plt.xlabel('$x_1$')
+plt.ylabel('$x_2$')
+plt.title('podatkovni primjeri')
+plt.show()
+
+do_tasks(500,1, 11)
+do_tasks(500,2, 3)
+do_tasks(500,3, 5)
+do_tasks(500,4, 7)
+do_tasks(500,5, 4)

@@ -19,6 +19,7 @@ for i in range(1,7):
     labels = km.fit_predict(img_array)
     centers = km.cluster_centers_
 
+
     # rekonstrukcija slike
     img_array_aprox = centers[labels]
     img_array_aprox = np.reshape(img_array_aprox, (w, h, d))
@@ -28,7 +29,7 @@ for i in range(1,7):
     axarr[0].imshow(img)
     axarr[0].set_title("Original")
     axarr[1].imshow(img_array_aprox)
-    axarr[1].set_title(f"KMeans (K={k})")
+    axarr[1].set_title("After clustering")
     plt.tight_layout()
     plt.show()
 
