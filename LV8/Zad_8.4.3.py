@@ -24,6 +24,9 @@ def do_prediction(path):
     prediction = model.predict(image_array, verbose=0)
     predicted_label = np.argmax(prediction)
 
+    plt.imshow(image_array[0])
+    plt.show()
+
     return predicted_label
 
 accurate = 0
