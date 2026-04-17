@@ -82,7 +82,7 @@ print(classes, counts_train)
 
 #b)
 logistic_regression = LogisticRegression(
-    max_iter=1000
+    max_iter=10000
 )
 logistic_regression.fit(X_train, y_train)
 
