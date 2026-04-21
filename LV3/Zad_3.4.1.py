@@ -42,8 +42,8 @@ print("TASK D")
 print("---------------------------")
 audi_measurements = data_cleared[data_cleared["Make"] == "Audi"]
 print(f"Number of measurements {len(audi_measurements)}") #audi_measurements.shape[0]
-audi_measurements_filtered = audi_measurements[audi_measurements["Cylinders"] == 4]
-print(f"CO2 consumption od audi with 4 cylinders {audi_measurements_filtered["CO2 Emissions (g/km)"].mean()}")
+audi_measurements_filtered = audi_measurements[audi_measurements['Cylinders'] == 4]
+print(f"CO2 consumption od audi with 4 cylinders {audi_measurements_filtered['CO2 Emissions (g/km)'].mean()}")
 
 #e)
 print("TASK E")
@@ -58,8 +58,8 @@ print("TASK F")
 print("---------------------------")
 diesel_cars = data_cleared[data_cleared["Fuel Type"] == "D"]
 gasoline_cars = data_cleared[(data_cleared["Fuel Type"] == "X")]
-print(f"Gasoline cars {gasoline_cars.shape[0]}, gasoline consumption = {gasoline_cars["Fuel Consumption City (L/100km)"].mean()}, Medijan = {gasoline_cars["Fuel Consumption City (L/100km)"].median()}")
-print(f"Diesel cars {diesel_cars.shape[0]}, diesel consumption = {diesel_cars["Fuel Consumption City (L/100km)"].mean()}, Medijan = {diesel_cars["Fuel Consumption City (L/100km)"].median()}")
+print(f"Gasoline cars {gasoline_cars.shape[0]}, gasoline consumption = {gasoline_cars['Fuel Consumption City (L/100km)'].mean()}, Medijan = {gasoline_cars['Fuel Consumption City (L/100km)'].median()}")
+print(f"Diesel cars {diesel_cars.shape[0]}, diesel consumption = {diesel_cars['Fuel Consumption City (L/100km)'].mean()}, Medijan = {diesel_cars['Fuel Consumption City (L/100km)'].median()}")
 
 #g)
 print("TASK F")
